@@ -9,6 +9,8 @@ import lombok.*;
 @EqualsAndHashCode
 public class Airline {
     private String name;
-    private String[] indexFlights;
-    private String[] clients;
+    private IndexFlights[] indexFlights;
+    private Clients[] clients;
+
+
 }

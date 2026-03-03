@@ -12,5 +12,5 @@ import java.util.Comparator;
 public class Passengers {
     private String nif;
     private String seatNumber;
-    private String[] luggages;
+    private Luggages[] luggages;
 }

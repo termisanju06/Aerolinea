@@ -12,5 +12,5 @@ public class IndexFlights {
     private String origin;
     private String destination;
     private String flightDate;
-    private String[] passengers;
+    private Passengers[] passengers;
 }
