@@ -2,6 +2,8 @@ package org.termi;
 
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @Getter
@@ -12,12 +14,5 @@ public class Airline {
     private IndexFlights[] indexFlights;
     private Clients[] clients;
 
-    private Passengers[] passengersByFlight(int flightNumber){
-        for (var indexflight : indexFlights){
-            if (indexflight.getFlightNumber() == flightNumber){
-                return indexflight.getPassengers();
-            }
-        }
-        return null;
-    }
+
 }
