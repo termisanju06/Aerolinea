@@ -7,8 +7,8 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Passengers {
+public class Clients {
     private String nif;
-    private String seatNumber;
-    private String[] luggages;
+    private String name;
+    private String surname;
 }

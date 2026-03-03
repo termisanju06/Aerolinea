@@ -1,14 +1,12 @@
 package org.termi;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class IndexFlights {
     private int flightNumber;
     private String origin;
