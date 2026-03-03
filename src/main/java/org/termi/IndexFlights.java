@@ -2,6 +2,8 @@ package org.termi;
 
 import lombok.*;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @Getter
@@ -12,5 +14,5 @@ public class IndexFlights {
     private String origin;
     private String destination;
     private String flightDate;
-    private Passengers[] passengers;
+    private Set<Passengers> passengers;
 }

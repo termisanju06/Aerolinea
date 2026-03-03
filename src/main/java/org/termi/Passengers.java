@@ -3,6 +3,7 @@ package org.termi;
 import lombok.*;
 
 import java.util.Comparator;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -12,5 +13,5 @@ import java.util.Comparator;
 public class Passengers {
     private String nif;
     private String seatNumber;
-    private Luggages[] luggages;
+    private List<Luggages> luggages;
 }
