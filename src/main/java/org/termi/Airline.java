@@ -2,10 +2,7 @@ package org.termi;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
@@ -17,6 +14,29 @@ public class Airline {
     private String name;
     private Map<Integer, IndexFlights> indexFlights;
     private List<Clients> clients;
+
+    public void rellenoDeAtributos(){
+        new Clients("123", "paco", "piña");
+        new Clients("456", "pico", "colada");
+        new Clients("789", "paca", "maria");
+
+        List<Luggages> luggages = new ArrayList<>();
+        luggages.add(new Luggages("ER1", "PUEDE"));
+        List<Luggages> luggages2 = new ArrayList<>();
+        luggages2.add(new Luggages("ER2", "NOPUEDE"));
+        List<Luggages> luggages3 = new ArrayList<>();
+        luggages3.add(new Luggages("ER3", "PUEDEPUEDE"));
+
+        Set<Passengers> passengers = new HashSet<>();
+        passengers.add(new Passengers("123A", 32, luggages));
+        Set<Passengers> passengers2 = new HashSet<>();
+        passengers2.add(new Passengers("123A", 32, luggages));
+        Set<Passengers> passengers3 = new HashSet<>();
+        passengers3.add(new Passengers("123A", 32, luggages));
+
+
+
+    }
 
     public Set<Passengers> getPassengersByFlightNumber(int flightnumber){
         IndexFlights indexFlights1 = indexFlights.get(flightnumber);
