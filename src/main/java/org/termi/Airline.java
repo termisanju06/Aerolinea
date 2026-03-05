@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 public class Airline {
     private String name;
-    private Map<Integer, IndexFlights> indexFlights;
+    private Map<Integer, Flights> indexFlights;
     private List<Clients> clients;
 
     public void rellenoDeAtributos(){
@@ -39,12 +39,12 @@ public class Airline {
         Set<Passengers> passengers3 = new HashSet<>();
         passengers3.add(new Passengers("123A", 32, luggages3));
 
-        Map<Integer, IndexFlights> indexFlightsMap = new HashMap<>();
-        indexFlightsMap.put(1, new IndexFlights(1,"Pamplona", "Pedrolandia", "Nose", passengers));
-        Map<Integer, IndexFlights> indexFlightsMap2 = new HashMap<>();
-        indexFlightsMap2.put(2,new IndexFlights(2,"CoreaDelNorte", "Pascua", "10/02/2075", passengers2));
-        Map<Integer, IndexFlights> indexFlightsMap3 = new HashMap<>();
-        indexFlightsMap3.put(3,new IndexFlights(3,"Pekin", "Partida", "01/01/0923", passengers3));
+        Map<Integer, Flights> indexFlightsMap = new HashMap<>();
+        indexFlightsMap.put(1, new Flights(1,"Pamplona", "Pedrolandia", "Nose", passengers));
+        Map<Integer, Flights> indexFlightsMap2 = new HashMap<>();
+        indexFlightsMap2.put(2,new Flights(2,"CoreaDelNorte", "Pascua", "10/02/2075", passengers2));
+        Map<Integer, Flights> indexFlightsMap3 = new HashMap<>();
+        indexFlightsMap3.put(3,new Flights(3,"Pekin", "Partida", "01/01/0923", passengers3));
 
         new Airline("PlusUltra", indexFlightsMap,clientsList);
         new Airline("Camerun", indexFlightsMap2,clientsList2);
@@ -52,18 +52,18 @@ public class Airline {
     }
 
     public Set<Passengers> getPassengersByFlightNumber(int flightnumber){
-        IndexFlights indexFlights1 = indexFlights.get(flightnumber);
-        if (indexFlights1 != null){
-            return indexFlights1.getPassengers();
+        Flights flights1 = indexFlights.get(flightnumber);
+        if (flights1 != null){
+            return flights1.getPassengers();
         }
         return null;
     }
     public List<Clients> getClientsByFlightNumber(int flightnumber){
-        IndexFlights indexFlights1 = indexFlights.get(flightnumber);
-        if (indexFlights1 == null){
+        Flights flights1 = indexFlights.get(flightnumber);
+        if (flights1 == null){
             return null;
         }
-        return indexFlights1.getPassengers().stream()
+        return flights1.getPassengers().stream()
                 .flatMap(passengers -> clients.stream()
                         .filter(client -> client.getNif().equals(passengers.getNif()))).toList();
     }
@@ -72,7 +72,7 @@ public class Airline {
                 .filter(c -> c.getSurname().equals(surname)).collect(Collectors.toList());
     }
     public Integer seatByFlightAndNif(Airline airline, int flightNumber, String nif){
-        IndexFlights flights = airline.getIndexFlights().get(flightNumber);
+        Flights flights = airline.getIndexFlights().get(flightNumber);
         if (flights == null){
             return  null;
         }
@@ -84,7 +84,7 @@ public class Airline {
         return null;
     }
     public void addLuggageToPassenger(Airline airline, int flightNumber, Luggages luggages, String nif){
-        IndexFlights flights = airline.getIndexFlights().get(flightNumber);
+        Flights flights = airline.getIndexFlights().get(flightNumber);
 
         if (flights == null){
             System.out.println("No hay un numero de vuelo correspondiente a: " + flightNumber);
@@ -103,9 +103,9 @@ public class Airline {
         }
         passengersFounded.getLuggages().add(luggages);
     }
-    public List<IndexFlights> flightsByNifWhereClientIsPassenger (Airline airline, String nif){
-        List<IndexFlights> clients = new ArrayList<>();
-        for (IndexFlights flights : airline.getIndexFlights().values()){
+    public List<Flights> flightsByNifWhereClientIsPassenger (Airline airline, String nif){
+        List<Flights> clients = new ArrayList<>();
+        for (Flights flights : airline.getIndexFlights().values()){
             for (Passengers passengers : flights.getPassengers()){
                 if (passengers.getNif().equalsIgnoreCase(nif)){
                     clients.add(flights);

@@ -9,7 +9,7 @@ import java.util.Set;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class IndexFlights {
+public class Flights {
     private int flightNumber;
     private String origin;
     private String destination;
