@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -32,5 +33,21 @@ public class Airline {
         return indexFlights1.getPassengers().stream()
                 .flatMap(passengers -> clients.stream()
                         .filter(client -> client.getNif().equals(passengers.getNif()))).toList();
+    }
+    public List<Clients> finClientsBySurname(Airline airline, String surname){
+        return airline.getClients().stream()
+                .filter(c -> c.getSurname().equals(surname)).collect(Collectors.toList());
+    }
+    public Integer seatByFlightAndNif(Airline airline, int flightNumber, String nif){
+        IndexFlights flights = airline.getIndexFlights().get(flightNumber);
+        if (flights == null){
+            return  null;
+        }
+        for (Passengers passengers : flights.getPassengers()){
+            if (passengers.getNif().equalsIgnoreCase(nif)){
+                return passengers.getSeatNumber();
+            }
+        }
+        return null;
     }
 }
