@@ -12,6 +12,6 @@ import java.util.List;
 @EqualsAndHashCode
 public class Passengers {
     private String nif;
-    private String seatNumber;
+    private int seatNumber;
     private List<Luggages> luggages;
 }
