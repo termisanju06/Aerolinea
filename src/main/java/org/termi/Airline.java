@@ -34,7 +34,7 @@ public class Airline {
                 .flatMap(passengers -> clients.stream()
                         .filter(client -> client.getNif().equals(passengers.getNif()))).toList();
     }
-    public List<Clients> finClientsBySurname(Airline airline, String surname){
+    public List<Clients> findClientsBySurname(Airline airline, String surname){
         return airline.getClients().stream()
                 .filter(c -> c.getSurname().equals(surname)).collect(Collectors.toList());
     }
