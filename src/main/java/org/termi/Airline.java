@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 public class Airline {
     private String name;
-    private Map<Integer, Flights> indexFlights;
+    private Map<Integer, Flights> flights;
     private List<Clients> clients;
 
     public void rellenoDeAtributos(){
@@ -39,27 +39,27 @@ public class Airline {
         Set<Passengers> passengers3 = new HashSet<>();
         passengers3.add(new Passengers("123A", 32, luggages3));
 
-        Map<Integer, Flights> indexFlightsMap = new HashMap<>();
-        indexFlightsMap.put(1, new Flights(1,"Pamplona", "Pedrolandia", "Nose", passengers));
-        Map<Integer, Flights> indexFlightsMap2 = new HashMap<>();
-        indexFlightsMap2.put(2,new Flights(2,"CoreaDelNorte", "Pascua", "10/02/2075", passengers2));
-        Map<Integer, Flights> indexFlightsMap3 = new HashMap<>();
-        indexFlightsMap3.put(3,new Flights(3,"Pekin", "Partida", "01/01/0923", passengers3));
+        Map<Integer, Flights> flightsMap = new HashMap<>();
+        flightsMap.put(1, new Flights(1,"Pamplona", "Pedrolandia", "Nose", passengers));
+        Map<Integer, Flights> flightsMap2 = new HashMap<>();
+        flightsMap2.put(2,new Flights(2,"CoreaDelNorte", "Pascua", "10/02/2075", passengers2));
+        Map<Integer, Flights> flightsMap3 = new HashMap<>();
+        flightsMap3.put(3,new Flights(3,"Pekin", "Partida", "01/01/0923", passengers3));
 
-        new Airline("PlusUltra", indexFlightsMap,clientsList);
-        new Airline("Camerun", indexFlightsMap2,clientsList2);
-        new Airline("Perdiz", indexFlightsMap3, clientsList3);
+        new Airline("PlusUltra", flightsMap,clientsList);
+        new Airline("Camerun", flightsMap2,clientsList2);
+        new Airline("Perdiz", flightsMap3, clientsList3);
     }
 
     public Set<Passengers> getPassengersByFlightNumber(int flightnumber){
-        Flights flights1 = indexFlights.get(flightnumber);
+        Flights flights1 = flights.get(flightnumber);
         if (flights1 != null){
             return flights1.getPassengers();
         }
         return null;
     }
     public List<Clients> getClientsByFlightNumber(int flightnumber){
-        Flights flights1 = indexFlights.get(flightnumber);
+        Flights flights1 = flights.get(flightnumber);
         if (flights1 == null){
             return null;
         }
@@ -72,7 +72,7 @@ public class Airline {
                 .filter(c -> c.getSurname().equals(surname)).collect(Collectors.toList());
     }
     public Integer seatByFlightAndNif(Airline airline, int flightNumber, String nif){
-        Flights flights = airline.getIndexFlights().get(flightNumber);
+        Flights flights = airline.getFlights().get(flightNumber);
         if (flights == null){
             return  null;
         }
@@ -84,7 +84,7 @@ public class Airline {
         return null;
     }
     public void addLuggageToPassenger(Airline airline, int flightNumber, Luggages luggages, String nif){
-        Flights flights = airline.getIndexFlights().get(flightNumber);
+        Flights flights = airline.getFlights().get(flightNumber);
 
         if (flights == null){
             System.out.println("No hay un numero de vuelo correspondiente a: " + flightNumber);
@@ -105,7 +105,7 @@ public class Airline {
     }
     public List<Flights> flightsByNifWhereClientIsPassenger (Airline airline, String nif){
         List<Flights> clients = new ArrayList<>();
-        for (Flights flights : airline.getIndexFlights().values()){
+        for (Flights flights : airline.getFlights().values()){
             for (Passengers passengers : flights.getPassengers()){
                 if (passengers.getNif().equalsIgnoreCase(nif)){
                     clients.add(flights);
