@@ -50,4 +50,35 @@ public class Airline {
         }
         return null;
     }
+    public void addLuggageToPassenger(Airline airline, int flightNumber, Luggages luggages, String nif){
+        IndexFlights flights = airline.getIndexFlights().get(flightNumber);
+
+        if (flights == null){
+            System.out.println("No hay un numero de vuelo correspondiente a: " + flightNumber);
+            return;
+        }
+        Passengers passengersFounded = null;
+        for (Passengers passengers : flights.getPassengers()){
+            if (passengers.getNif().equalsIgnoreCase(nif)){
+                passengersFounded = passengers;
+                break;
+            }
+        }
+        if (passengersFounded == null){
+            System.out.println("Error: No hay un pasajero con un nif de: " + nif + " En el vuelo: " + flightNumber);
+            return;
+        }
+        passengersFounded.getLuggages().add(luggages);
+    }
+    public List<IndexFlights> flightsByNifWhereClientIsPassenger (Airline airline, String nif){
+        List<IndexFlights> clients = new ArrayList<>();
+        for (IndexFlights flights : airline.getIndexFlights().values()){
+            for (Passengers passengers : flights.getPassengers()){
+                if (passengers.getNif().equalsIgnoreCase(nif)){
+                    clients.add(flights);
+                }
+            }
+        }
+        return clients;
+    }
 }
