@@ -16,9 +16,14 @@ public class Airline {
     private List<Clients> clients;
 
     public void rellenoDeAtributos(){
-        new Clients("123", "paco", "piña");
+        List<Clients> clientsList = new ArrayList<>();
+        clientsList.add(new Clients("123", "paco", "piña"));
+        List<Clients> clientsList2 = new ArrayList<>();
+        clientsList2.add(new Clients("456", "pico", "colada"));
         new Clients("456", "pico", "colada");
-        new Clients("789", "paca", "maria");
+        List<Clients> clientsList3 = new ArrayList<>();
+        clientsList3.add(new Clients("789", "paca", "maria"));
+
 
         List<Luggages> luggages = new ArrayList<>();
         luggages.add(new Luggages("ER1", "PUEDE"));
@@ -30,15 +35,24 @@ public class Airline {
         Set<Passengers> passengers = new HashSet<>();
         passengers.add(new Passengers("123A", 32, luggages));
         Set<Passengers> passengers2 = new HashSet<>();
-        passengers2.add(new Passengers("123A", 32, luggages));
+        passengers2.add(new Passengers("123A", 32, luggages2));
         Set<Passengers> passengers3 = new HashSet<>();
-        passengers3.add(new Passengers("123A", 32, luggages));
+        passengers3.add(new Passengers("123A", 32, luggages3));
 
+        Map<Integer, IndexFlights> indexFlightsMap = new HashMap<>();
+        indexFlightsMap.put(1, new IndexFlights(1,"Pamplona", "Pedrolandia", "Nose", passengers));
+        Map<Integer, IndexFlights> indexFlightsMap2 = new HashMap<>();
+        indexFlightsMap2.put(2,new IndexFlights(2,"CoreaDelNorte", "Pascua", "10/02/2075", passengers2));
+        Map<Integer, IndexFlights> indexFlightsMap3 = new HashMap<>();
+        indexFlightsMap3.put(3,new IndexFlights(3,"Pekin", "Partida", "01/01/0923", passengers3));
 
-
+        new Airline("PlusUltra", indexFlightsMap,clientsList);
+        new Airline("Camerun", indexFlightsMap2,clientsList2);
+        new Airline("Perdiz", indexFlightsMap3, clientsList3);
     }
 
     public Set<Passengers> getPassengersByFlightNumber(int flightnumber){
+        rellenoDeAtributos();
         IndexFlights indexFlights1 = indexFlights.get(flightnumber);
         if (indexFlights1 != null){
             return indexFlights1.getPassengers();
@@ -46,6 +60,7 @@ public class Airline {
         return null;
     }
     public List<Clients> getClientsByFlightNumber(int flightnumber){
+        rellenoDeAtributos();
         IndexFlights indexFlights1 = indexFlights.get(flightnumber);
         if (indexFlights1 == null){
             return null;
@@ -55,10 +70,12 @@ public class Airline {
                         .filter(client -> client.getNif().equals(passengers.getNif()))).toList();
     }
     public List<Clients> findClientsBySurname(Airline airline, String surname){
+        rellenoDeAtributos();
         return airline.getClients().stream()
                 .filter(c -> c.getSurname().equals(surname)).collect(Collectors.toList());
     }
     public Integer seatByFlightAndNif(Airline airline, int flightNumber, String nif){
+        rellenoDeAtributos();
         IndexFlights flights = airline.getIndexFlights().get(flightNumber);
         if (flights == null){
             return  null;
@@ -71,6 +88,7 @@ public class Airline {
         return null;
     }
     public void addLuggageToPassenger(Airline airline, int flightNumber, Luggages luggages, String nif){
+        rellenoDeAtributos();
         IndexFlights flights = airline.getIndexFlights().get(flightNumber);
 
         if (flights == null){
@@ -91,6 +109,7 @@ public class Airline {
         passengersFounded.getLuggages().add(luggages);
     }
     public List<IndexFlights> flightsByNifWhereClientIsPassenger (Airline airline, String nif){
+        rellenoDeAtributos();
         List<IndexFlights> clients = new ArrayList<>();
         for (IndexFlights flights : airline.getIndexFlights().values()){
             for (Passengers passengers : flights.getPassengers()){
